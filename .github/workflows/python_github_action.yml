@@ -9,16 +9,18 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Check Python version
+    - name: Create virtual environment
       run: |
-        python3.14 --version
+        python3 -m venv venv
 
     - name: Install dependencies
       run: |
-        python3.14 -m pip install --upgrade pip
-        pip3.14 install pytest
+        source venv/bin/activate
+        pip install --upgrade pip
+        pip install pytest
 
     - name: Run tests
       run: |
+        source venv/bin/activate
         cd src
-        python3.14 -m pytest addition.py
+        pytest addition.py
